@@ -20,7 +20,7 @@ class Booking(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     guest_id = db.Column(db.Integer, db.ForeignKey('guest.id'), nullable=False)
     room_id = db.Column(db.Integer, db.ForeignKey('room.id'), nullable=False)
-    check_in_date = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    check_in_date = db.Column(db.DateTime, nullable=False)
     check_out_date = db.Column(db.DateTime, nullable=False)
     total_price = db.Column(db.Float, nullable=False)
 
