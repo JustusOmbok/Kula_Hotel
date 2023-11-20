@@ -1,7 +1,8 @@
-from flask import render_template, request, jsonify
+from flask import render_template, request, jsonify, session, redirect, url_for
+from werkzeug.security import generate_password_hash, check_password_hash
 from app import app, db
 from datetime import datetime
-from app.models import Booking, Guest, Room
+from app.models import Booking, Guest, Room, User
 
 # Home Page
 @app.route('/')
@@ -76,3 +77,37 @@ def delete_booking(booking_id):
         db.session.commit()
         return jsonify({'message': 'Booking deleted'})
     return jsonify({'error': 'Booking not found'}), 404
+
+@app.route('/api/users', methods=['POST'])
+def create_user():
+    data = request.get_json()
+
+    new_user = User(
+        username=data['username'],
+        password=data['password']
+    )
+
+    db.session.add(new_user)
+    db.session.commit()
+
+    return jsonify({'message': 'User created successfully'}), 201
+
+@app.route('/login', methods=['POST'])
+def login():
+    data = request.get_json()
+    username = data.get('username')
+    password = data.get('password')
+
+    user = User.query.filter_by(username=username).first()
+
+    if user and check_password_hash(user.password, password):
+        session['user_id'] = user.id
+        return jsonify({'message': 'Login successful'}), 200
+    else:
+        return jsonify({'error': 'Invalid username or password'}), 401
+
+@app.route('/logout', methods=['POST'])
+def logout():
+    with app.app_context():
+        session.pop('user_id', None)
+        return jsonify({'message': 'Logout successful'}), 200

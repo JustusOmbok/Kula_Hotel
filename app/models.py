@@ -24,6 +24,7 @@ class Booking(db.Model):
     check_out_date = db.Column(db.DateTime, nullable=False)
     total_price = db.Column(db.Float, nullable=False)
 
+
     def serialize(self):
         return {
             'id': self.id,
@@ -44,3 +45,8 @@ class Booking(db.Model):
             'check_out_date': self.check_out_date.isoformat(),
             'total_price': self.total_price,
         }
+
+class User(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(50), unique=True, nullable=False)
+    password = db.Column(db.String(100), nullable=False)
