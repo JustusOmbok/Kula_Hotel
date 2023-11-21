@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book a Room</title>
+</head>
+<body>
+    <h2>Book a Room</h2>
+
+
+    <form id="bookingForm">
+        <label for="firstName">First Name:</label>
+        <input type="text" id="firstName" name="first_name" required><br>
+
+
+        <label for="lastName">Last Name:</label>
+        <input type="text" id="lastName" name="last_name" required><br>
+
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required><br>
+
+
+        <label for="phone">Phone:</label>
+        <input type="text" id="phone" name="phone" required><br>
+
+
+        <label for="roomNumber">Room Number:</label>
+        <input type="text" id="roomNumber" name="room_number" required><br>
+
+
+        <label for="roomType">Room Type:</label>
+        <input type="text" id="roomType" name="room_type" required><br>
+
+
+        <label for="pricePerNight">Price Per Night:</label>
+        <input type="number" id="pricePerNight" name="price_per_night" required><br>
+
+
+        <label for="checkInDate">Check-In Date:</label>
+        <input type="date" id="checkInDate" name="check_in_date" required><br>
+
+
+        <label for="checkOutDate">Check-Out Date:</label>
+        <input type="date" id="checkOutDate" name="check_out_date" required><br>
+
+
+        <label for="totalPrice">Total Price:</label>
+        <input type="number" id="totalPrice" name="total_price" required><br>
+
+
+        <button type="button" onclick="submitBooking()">Book Now</button>
+    </form>
+
+
+    <script>
+        function submitBooking() {
+    const form = document.getElementById('bookingForm');
+    const formData = new FormData(form);
+
+
+    fetch('/api/bookings', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            guest: Object.fromEntries(formData),
+            room: {
+                room_number: formData.get('room_number'),
+                room_type: formData.get('room_type'),
+                price_per_night: formData.get('price_per_night'),
+            },
+            check_in_date: formData.get('check_in_date'),
+            check_out_date: formData.get('check_out_date'),
+            total_price: formData.get('total_price'),
+        }),
+    })
+    .then(response => response.json())
+    .then(data => {
+        alert(data.message);
+        // Optionally, you can redirect or perform other actions after successful booking
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('An error occurred while booking.');
+    });
+}
+    </script>
+</body>
+</html>

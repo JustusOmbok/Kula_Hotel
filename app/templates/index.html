@@ -3,9 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kula_Hotel</title>
+    <title>Test PUT Method</title>
 </head>
 <body>
-    <h1>Kula_Hotel</h1>
+
+    <h1>Test PUT Method</h1>
+
+    <label for="bookingId">Booking ID:</label>
+    <input type="text" id="bookingId" placeholder="Enter Booking ID">
+
+    <label for="totalPrice">New Total Price:</label>
+    <input type="text" id="totalPrice" placeholder="Enter New Total Price">
+
+    <label for="checkOutDate">New Check Out Date:</label>
+    <input type="text" id="checkOutDate" placeholder="Enter New Check Out Date (YYYY-MM-DD)">
+
+    <button onclick="updateBooking()">Update Booking</button>
+
+    <div id="result"></div>
+
+    <script>
+        function updateBooking() {
+            var bookingId = document.getElementById('bookingId').value;
+            var newTotalPrice = document.getElementById('totalPrice').value;
+            var newCheckOutDate = document.getElementById('checkOutDate').value;
+
+            // Make sure the date is in the correct format (YYYY-MM-DD)
+            var formattedDate = newCheckOutDate.split('/').reverse().join('-');
+
+            // Make a PUT request using fetch API
+            fetch(`/api/bookings/${bookingId}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    total_price: newTotalPrice,
+                    check_out_date: formattedDate,
+                }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Display the result
+                document.getElementById('result').innerHTML = JSON.stringify(data, null, 2);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+    </script>
+
 </body>
 </html>

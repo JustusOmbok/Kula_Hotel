@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking API Test</title>
+</head>
+<body>
+
+<h1>Booking API Test</h1>
+
+<label for="bookingIdInput">Booking ID:</label>
+<input type="number" id="bookingIdInput" placeholder="Enter Booking ID">
+<button onclick="getBooking()">Get Booking</button>
+<div id="bookingResult"></div>
+
+<script>
+    function getBooking() {
+        // Get the booking ID from the input field
+        var bookingId = document.getElementById('bookingIdInput').value;
+
+        // Make sure a valid booking ID is entered
+        if (!bookingId || isNaN(bookingId)) {
+            alert('Please enter a valid Booking ID.');
+            return;
+        }
+
+        // Make a GET request to the API endpoint
+        fetch(`/api/bookings/${bookingId}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+        .then(response => response.json())
+        .then(data => {
+            // Display the result in the 'bookingResult' div
+            document.getElementById('bookingResult').innerHTML = JSON.stringify(data, null, 2);
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            document.getElementById('bookingResult').innerHTML = 'Error occurred. Check the console for details.';
+        });
+    }
+</script>
+
+</body>
+</html>

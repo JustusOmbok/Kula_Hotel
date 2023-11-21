@@ -1,5 +1,4 @@
 from flask import render_template, request, jsonify, session, redirect, url_for
-from werkzeug.security import generate_password_hash, check_password_hash
 from app import app, db
 from datetime import datetime
 from app.models import Booking, Guest, Room, User
@@ -7,7 +6,7 @@ from app.models import Booking, Guest, Room, User
 # Home Page
 @app.route('/')
 def home():
-    return render_template('index.html')
+    return render_template('create_booking.html')
 
 # RESTful API for Booking
 @app.route('/api/bookings', methods=['GET'])
@@ -100,7 +99,7 @@ def login():
 
     user = User.query.filter_by(username=username).first()
 
-    if user and check_password_hash(user.password, password):
+    if user and user.password == password:
         session['user_id'] = user.id
         return jsonify({'message': 'Login successful'}), 200
     else:

@@ -1,6 +1,7 @@
 import unittest
 import tempfile
 from datetime import datetime
+from flask_testing import TestCase
 import os
 from flask import Flask, session
 from app import app, db
@@ -21,11 +22,6 @@ class BookingTestCase(unittest.TestCase):
         # Create the database tables
         with self.app.application.app_context():
             self.db.create_all()
-
-        # Clear existing data in the database
-        self.clear_database()
-
-        self.db = db
 
         # Clear existing data in the database
         self.clear_database()
@@ -211,41 +207,46 @@ class BookingTestCase(unittest.TestCase):
     def create_test_user(self):
         # Define the data for creating a test user
         user_data = {
-            'username': 'staff',
-            'password': 'password123'
+            'username': 'staff1',
+            'password': 'password1234'
         }
 
         # Send a POST request to the API endpoint to create a user
         response = self.app.post('/api/users', json=user_data)
+        print(response.status_code)
+        print(response.get_json())
 
         # Commit the changes to the database
         self.db.session.commit()
 
     def test_login_logout(self):
-        # Create a test user
-        self.create_test_user()
+        with self.app.application.app_context():
+            # Create a test user
+            self.create_test_user()
 
-        # Send a POST request to the API endpoint to log in
-        login_data = {
-            'username': 'staff2',
-            'password': 'password1232'
-        }
-        login_response = self.app.post('/login', json=login_data)
+            # Use the testing client to simulate a login request
+            login_data = {
+                'username': 'staff1',
+                'password': 'password123'
+            }
+            login_response = self.client.post('/login', json=login_data)
 
-        # Check if the login response status code is 200 (OK)
-        self.assertEqual(login_response.status_code, 200)
+            # Check if the login response status code is 200 (OK)
+            self.assertEqual(login_response.status_code, 200)
 
-        # Check if the session contains the user_id
-        self.assertIn('user_id', session)
+            # Check if the session contains the user_id using the testing client's session
+            with self.client.session_transaction() as sess:
+                self.assertIn('user_id', sess)
 
-        # Send a POST request to the API endpoint to log out
-        logout_response = self.app.post('/logout')
+            # Use the testing client to simulate a logout request
+            logout_response = self.client.post('/logout')
 
-        # Check if the logout response status code is 200 (OK)
-        self.assertEqual(logout_response.status_code, 200)
+            # Check if the logout response status code is 200 (OK)
+            self.assertEqual(logout_response.status_code, 200)
 
-        # Check if the session no longer contains the user_id
-        self.assertNotIn('user_id', session)
+            # Check if the session no longer contains the user_id using the testing client's session
+            with self.client.session_transaction() as sess:
+                self.assertNotIn('user_id', sess)
 
 
 if __name__ == '__main__':

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking API Test</title>
+</head>
+<body>
+    <h1>Booking API Test</h1>
+
+    <button onclick="getBookings()">Get Bookings</button>
+
+    <div id="result"></div>
+
+    <script>
+        function getBookings() {
+            // Using Fetch API to make a GET request to the API endpoint
+            fetch('/api/bookings')
+                .then(response => response.json())
+                .then(data => {
+                    // Display the result on the webpage
+                    document.getElementById('result').innerHTML = JSON.stringify(data, null, 2);
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    document.getElementById('result').innerHTML = 'Error occurred. Check the console for details.';
+                });
+        }
+    </script>
+</body>
+</html>
