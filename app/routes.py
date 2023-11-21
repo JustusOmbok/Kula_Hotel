@@ -6,7 +6,7 @@ from app.models import Booking, Guest, Room, User
 # Home Page
 @app.route('/')
 def home():
-    return render_template('create_booking.html')
+    return render_template('logout_test.html')
 
 # RESTful API for Booking
 @app.route('/api/bookings', methods=['GET'])
@@ -59,12 +59,17 @@ def create_booking():
 def update_booking(booking_id):
     data = request.get_json()
     booking = Booking.query.get(booking_id)
+    
     if booking:
+        # Convert the 'check_out_date' string to a datetime object
+        data['check_out_date'] = datetime.strptime(data['check_out_date'], "%Y-%m-%d")
+        data['check_in_date'] = datetime.strptime(data['check_in_date'], "%Y-%m-%d")
         # Update the booking and return it as JSON
         for key, value in data.items():
             setattr(booking, key, value)
         db.session.commit()
-        return jsonify(booking.serialize())
+        return jsonify({'message': 'Booking updated successfully'}), 201
+    
     return jsonify({'error': 'Booking not found'}), 404
 
 @app.route('/api/bookings/<int:booking_id>', methods=['DELETE'])

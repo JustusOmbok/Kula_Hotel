@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test PUT Method</title>
+</head>
+<body>
+
+    <h1>Test PUT Method</h1>
+
+    <label for="bookingId">Booking ID:</label>
+    <input type="text" id="bookingId" placeholder="Enter Booking ID">
+
+    <label for="totalPrice">New Total Price:</label>
+    <input type="text" id="totalPrice" placeholder="Enter New Total Price">
+
+    <label for="checkInDate">New Check In Date:</label>
+    <input type="text" id="checkInDate" placeholder="Enter New Check In Date (YYYY-MM-DD)">
+
+    <label for="checkOutDate">New Check Out Date:</label>
+    <input type="text" id="checkOutDate" placeholder="Enter New Check Out Date (YYYY-MM-DD)">
+
+    <button onclick="updateBooking()">Update Booking</button>
+
+    <div id="result"></div>
+
+    <script>
+    function updateBooking() {
+        var bookingId = document.getElementById('bookingId').value;
+        var newTotalPrice = document.getElementById('totalPrice').value;
+        var newCheckInDate = document.getElementById('checkInDate').value;
+        var newCheckOutDate = document.getElementById('checkOutDate').value;
+
+        // Check if newCheckInDate and newCheckOutDate are not empty
+        if (!newCheckInDate || !newCheckOutDate) {
+            console.error('Check In Date and Check Out Date are required.');
+            return;
+        }
+
+        // Make sure the dates are in the correct format (YYYY-MM-DD)
+        var checkInDateParts = newCheckInDate.split('-');
+        var checkOutDateParts = newCheckOutDate.split('-');
+
+        if (checkInDateParts.length !== 3 || checkOutDateParts.length !== 3) {
+            console.error('Invalid date format. Use YYYY-MM-DD.');
+            return;
+        }
+
+        var formattedCheckInDate = checkInDateParts[0] + '-' + checkInDateParts[1] + '-' + checkInDateParts[2];
+        var formattedCheckOutDate = checkOutDateParts[0] + '-' + checkOutDateParts[1] + '-' + checkOutDateParts[2];
+
+        // Make a PUT request using fetch API
+        fetch(`/api/bookings/${bookingId}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                total_price: newTotalPrice,
+                check_in_date: formattedCheckInDate,
+                check_out_date: formattedCheckOutDate,
+            }),
+        })
+        .then(response => response.json())
+        .then(data => {
+            // Display the result
+            document.getElementById('result').innerHTML = JSON.stringify(data, null, 2);
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    }
+</script>
+
+</body>
+</html>
