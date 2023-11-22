@@ -14,7 +14,14 @@ class Room(db.Model):
     room_number = db.Column(db.String(10), unique=True, nullable=False)
     room_type = db.Column(db.String(50), nullable=False)
     price_per_night = db.Column(db.Float, nullable=False)
+    available = db.Column(db.Boolean, default=True)  # New field for room availability
     bookings = db.relationship('Booking', backref='room', lazy=True)
+
+    def mark_as_booked(self):
+        self.available = False
+
+    def mark_as_available(self):
+        self.available = True
 
 class Booking(db.Model):
     id = db.Column(db.Integer, primary_key=True)

@@ -8,85 +8,155 @@
 <body>
     <h2>Book a Room</h2>
 
-
     <form id="bookingForm">
         <label for="firstName">First Name:</label>
         <input type="text" id="firstName" name="first_name" required><br>
 
-
         <label for="lastName">Last Name:</label>
         <input type="text" id="lastName" name="last_name" required><br>
-
 
         <label for="email">Email:</label>
         <input type="email" id="email" name="email" required><br>
 
-
         <label for="phone">Phone:</label>
         <input type="text" id="phone" name="phone" required><br>
 
-
-        <label for="roomNumber">Room Number:</label>
-        <input type="text" id="roomNumber" name="room_number" required><br>
-
+        <!-- Other form fields... -->
 
         <label for="roomType">Room Type:</label>
-        <input type="text" id="roomType" name="room_type" required><br>
+        <select id="roomType" name="room_type" required>
+            <option value="...">...</option>
+            <option value="standard">standard</option>
+            <option value="executive">executive</option>
+            <option value="presidential">presidential</option>
+            <!-- Add other room types as needed -->
+        </select><br>
 
+        <label for="roomNumber">Room Number:</label>
+        <select id="roomNumber" name="room_number" required>
+            <!-- Options will be populated dynamically using JavaScript -->
+        </select><br>
 
         <label for="pricePerNight">Price Per Night:</label>
         <input type="number" id="pricePerNight" name="price_per_night" required><br>
 
-
         <label for="checkInDate">Check-In Date:</label>
         <input type="date" id="checkInDate" name="check_in_date" required><br>
-
 
         <label for="checkOutDate">Check-Out Date:</label>
         <input type="date" id="checkOutDate" name="check_out_date" required><br>
 
-
         <label for="totalPrice">Total Price:</label>
-        <input type="number" id="totalPrice" name="total_price" required><br>
+        <input type="number" id="totalPrice" name="total_price" required readonly><br>
 
+        <!-- Other form fields... -->
 
         <button type="button" onclick="submitBooking()">Book Now</button>
     </form>
 
-
     <script>
+        document.getElementById('roomType').addEventListener('change', function () {
+            const selectedRoomType = this.value;
+            const roomNumberSelect = document.getElementById('roomNumber');
+            const pricePerNightInput = document.getElementById('pricePerNight');
+    
+            // Clear existing options
+            roomNumberSelect.innerHTML = '';
+    
+            // Fetch available room numbers and price per night for the selected room type
+            fetch(`/api/available_rooms?room_type=${selectedRoomType}`)
+                .then(response => response.json())
+                .then(data => {
+                    // Populate the room numbers dropdown
+                    data.forEach(room => {
+                        const option = document.createElement('option');
+                        option.value = room.room_number;
+                        option.text = room.room_number;
+                        roomNumberSelect.appendChild(option);
+                    });
+    
+                    // Set the price per night in the form based on the selected room type
+                    if (data.length > 0) {
+                        pricePerNightInput.value = data[0].price_per_night; // Assuming the price is in the first room
+                    } else {
+                        pricePerNightInput.value = ''; // No available rooms, clear the price
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('An error occurred while fetching available room numbers.');
+                });
+        });
+    
+        document.getElementById('roomNumber').addEventListener('change', function () {
+            const selectedRoomNumber = this.value;
+            const pricePerNightInput = document.getElementById('pricePerNight');
+    
+            // Fetch the price per night for the selected room number
+            fetch(`/api/room_price?room_number=${selectedRoomNumber}`)
+                .then(response => response.json())
+                .then(data => {
+                    // Set the price per night in the form based on the selected room number
+                    if (data && data.price_per_night) {
+                        pricePerNightInput.value = data.price_per_night;
+                    } else {
+                        pricePerNightInput.value = ''; // No price available for the selected room, clear the price
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('An error occurred while fetching the room price.');
+                });
+        });
+    
+        document.getElementById('checkInDate').addEventListener('change', updateTotalPrice);
+        document.getElementById('checkOutDate').addEventListener('change', updateTotalPrice);
+    
+        function updateTotalPrice() {
+            const checkInDate = new Date(document.getElementById('checkInDate').value);
+            const checkOutDate = new Date(document.getElementById('checkOutDate').value);
+            const pricePerNight = parseFloat(document.getElementById('pricePerNight').value);
+    
+            if (!isNaN(checkInDate) && !isNaN(checkOutDate) && !isNaN(pricePerNight)) {
+                const daysBooked = Math.ceil((checkOutDate - checkInDate) / (1000 * 60 * 60 * 24));
+                const totalPrice = pricePerNight * daysBooked;
+    
+                document.getElementById('totalPrice').value = totalPrice.toFixed(2);
+            }
+        }
+    
+        // Function to submit the booking (as provided in your original code)
         function submitBooking() {
-    const form = document.getElementById('bookingForm');
-    const formData = new FormData(form);
-
-
-    fetch('/api/bookings', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            guest: Object.fromEntries(formData),
-            room: {
-                room_number: formData.get('room_number'),
-                room_type: formData.get('room_type'),
-                price_per_night: formData.get('price_per_night'),
-            },
-            check_in_date: formData.get('check_in_date'),
-            check_out_date: formData.get('check_out_date'),
-            total_price: formData.get('total_price'),
-        }),
-    })
-    .then(response => response.json())
-    .then(data => {
-        alert(data.message);
-        // Optionally, you can redirect or perform other actions after successful booking
-    })
-    .catch(error => {
-        console.error('Error:', error);
-        alert('An error occurred while booking.');
-    });
-}
+            const form = document.getElementById('bookingForm');
+            const formData = new FormData(form);
+    
+            fetch('/api/bookings', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    guest: Object.fromEntries(formData),
+                    room: {
+                        room_number: formData.get('room_number'),
+                        room_type: formData.get('room_type'),
+                        price_per_night: formData.get('price_per_night'),
+                    },
+                    check_in_date: formData.get('check_in_date'),
+                    check_out_date: formData.get('check_out_date'),
+                    total_price: formData.get('total_price'),
+                }),
+            })
+                .then(response => response.json())
+                .then(data => {
+                    alert(data.message);
+                    // Optionally, you can redirect or perform other actions after successful booking
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('An error occurred while booking.');
+                });
+        }
     </script>
 </body>
 </html>

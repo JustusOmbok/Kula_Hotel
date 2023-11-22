@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Room</title>
+</head>
+<body>
+    <h2>Add Room</h2>
+
+    <form id="addRoomForm">
+        <label for="roomNumber">Room Number:</label>
+        <input type="text" id="roomNumber" name="room_number" required><br>
+
+        <label for="roomType">Room Type:</label>
+        <input type="text" id="roomType" name="room_type" required><br>
+
+        <label for="pricePerNight">Price Per Night:</label>
+        <input type="number" id="pricePerNight" name="price_per_night" required><br>
+
+        <button type="button" onclick="addRoom()">Add Room</button>
+    </form>
+
+    <script>
+        function addRoom() {
+            const roomNumber = document.getElementById('roomNumber').value;
+            const roomType = document.getElementById('roomType').value;
+            const pricePerNight = document.getElementById('pricePerNight').value;
+
+            const data = {
+                room_number: roomNumber,
+                room_type: roomType,
+                price_per_night: pricePerNight,
+            };
+
+            fetch('/api/rooms', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert(data.message);
+                // Optionally, you can redirect or perform other actions after successful room addition
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('An error occurred while adding a room.');
+            });
+        }
+    </script>
+</body>
+</html>

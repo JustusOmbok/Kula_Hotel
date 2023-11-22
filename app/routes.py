@@ -34,26 +34,27 @@ def create_booking():
         phone=data['guest']['phone']
     )
 
-    room = Room(
-        room_number=data['room']['room_number'],
-        room_type=data['room']['room_type'],
-        price_per_night=data['room']['price_per_night']
-    )
+    room = Room.query.filter_by(room_number=data['room']['room_number']).first()
+    
+    if room and room.available:
+        booking = Booking(
+            guest=guest,
+            room=room,
+            check_in_date=datetime.strptime(data['check_in_date'], "%Y-%m-%d"),
+            check_out_date=datetime.strptime(data['check_out_date'], "%Y-%m-%d"),
+            total_price=data['total_price']
+        )
 
-    booking = Booking(
-        guest=guest,
-        room=room,
-        check_in_date=datetime.strptime(data['check_in_date'], "%Y-%m-%d"),
-        check_out_date=datetime.strptime(data['check_out_date'], "%Y-%m-%d"),
-        total_price=data['total_price']
-    )
+        # Mark the room as booked
+        room.mark_as_booked()
 
-    db.session.add(guest)
-    db.session.add(room)
-    db.session.add(booking)
-    db.session.commit()
+        db.session.add(guest)
+        db.session.add(booking)
+        db.session.commit()
 
-    return jsonify({'message': 'Booking created successfully'}), 201
+        return jsonify({'message': 'Booking created successfully'}), 201
+    else:
+        return jsonify({'error': 'Room not available or does not exist'}), 400
 
 @app.route('/api/bookings/<int:booking_id>', methods=['PUT'])
 def update_booking(booking_id):
@@ -76,6 +77,9 @@ def update_booking(booking_id):
 def delete_booking(booking_id):
     booking = Booking.query.get(booking_id)
     if booking:
+        # Mark the room as available
+        booking.room.mark_as_available()
+
         # Delete the booking
         db.session.delete(booking)
         db.session.commit()
@@ -115,3 +119,65 @@ def logout():
     with app.app_context():
         session.pop('user_id', None)
         return jsonify({'message': 'Logout successful'}), 200
+    
+@app.route('/api/rooms', methods=['POST'])
+def add_room():
+    data = request.get_json()
+
+    new_room = Room(
+        room_number=data['room_number'],
+        room_type=data['room_type'],
+        price_per_night=data['price_per_night'],
+        available=True  # New room is initially available
+    )
+
+    db.session.add(new_room)
+    db.session.commit()
+
+    return jsonify({'message': 'Room added successfully'}), 201
+
+@app.route('/api/available_rooms', methods=['GET'])
+def get_available_rooms():
+    room_type = request.args.get('room_type')
+
+    if room_type:
+        available_rooms = Room.query.filter_by(room_type=room_type, available=True).all()
+        response_data = [{'room_number': room.room_number, 'price_per_night': room.price_per_night} for room in available_rooms]
+        return jsonify(response_data)
+
+    return jsonify({'error': 'Invalid request'}), 400
+
+@app.route('/api/room_price', methods=['GET'])
+def get_room_price():
+    room_number = request.args.get('room_number')
+
+    if room_number:
+        room = Room.query.filter_by(room_number=room_number).first()
+        if room:
+            return jsonify({'price_per_night': room.price_per_night})
+
+    return jsonify({'error': 'Invalid room number'}), 400
+
+@app.route('/create_booking', methods=['GET'])
+def render_create_booking():
+    return render_template('create_booking.html')
+
+@app.route('/add_room', methods=['GET'])
+def render_add_room():
+    return render_template('add_room.html')
+
+@app.route('/delete_booking', methods=['GET'])
+def render_delete_booking():
+    return render_template('delete_booking.html')
+
+@app.route('/get_all_bookings', methods=['GET'])
+def render_get_all_bookings():
+    return render_template('get_all_bookings.html')
+
+@app.route('/get_booking_by_id', methods=['GET'])
+def render_get_booking_by_id():
+    return render_template('get_booking_by_id.html')
+
+@app.route('/update_booking', methods=['GET'])
+def render_update_booking():
+    return render_template('update_booking.html')
