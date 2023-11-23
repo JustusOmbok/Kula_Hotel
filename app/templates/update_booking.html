@@ -3,17 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Test PUT Method</title>
+    <title>Update Booking</title>
 </head>
 <body>
 
-    <h1>Test PUT Method</h1>
+    <h1>Update Booking</h1>
 
     <label for="bookingId">Booking ID:</label>
     <input type="text" id="bookingId" placeholder="Enter Booking ID">
-
-    <label for="totalPrice">New Total Price:</label>
-    <input type="text" id="totalPrice" placeholder="Enter New Total Price">
 
     <label for="checkInDate">New Check In Date:</label>
     <input type="text" id="checkInDate" placeholder="Enter New Check In Date (YYYY-MM-DD)">
@@ -28,7 +25,6 @@
     <script>
     function updateBooking() {
         var bookingId = document.getElementById('bookingId').value;
-        var newTotalPrice = document.getElementById('totalPrice').value;
         var newCheckInDate = document.getElementById('checkInDate').value;
         var newCheckOutDate = document.getElementById('checkOutDate').value;
 
@@ -57,7 +53,6 @@
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                total_price: newTotalPrice,
                 check_in_date: formattedCheckInDate,
                 check_out_date: formattedCheckOutDate,
             }),

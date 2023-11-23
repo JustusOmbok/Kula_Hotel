@@ -6,7 +6,7 @@ from app.models import Booking, Guest, Room, User
 # Home Page
 @app.route('/')
 def home():
-    return render_template('logout_test.html')
+    return render_template('home.html')
 
 # RESTful API for Booking
 @app.route('/api/bookings', methods=['GET'])
