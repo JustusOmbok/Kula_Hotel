@@ -42,8 +42,12 @@
             })
             .then(response => response.json())
             .then(data => {
+                console.log('Server response:', data);
                 alert(data.message);
-                // Optionally, you can redirect or perform other actions after successful room addition
+                if (data.success) {
+                    // Redirect to the user dashboard
+                    window.location.href = '/user/dashboard';
+                }
             })
             .catch(error => {
                 console.error('Error:', error);

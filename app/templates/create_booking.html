@@ -151,6 +151,7 @@
                 .then(data => {
                     alert(data.message);
                     // Optionally, you can redirect or perform other actions after successful booking
+                    window.location.href = '/';
                 })
                 .catch(error => {
                     console.error('Error:', error);

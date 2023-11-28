@@ -1,21 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Head content -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create User Test</title>
+    <title>Create User</title>
 </head>
 <body>
-    <h1>Create User Test</h1>
+    <h1>Sign Up</h1>
 
-    <form id="createUserForm">
+    <form id="signupForm">
         <label for="username">Username:</label>
         <input type="text" id="username" name="username" required>
 
         <label for="password">Password:</label>
         <input type="password" id="password" name="password" required>
 
-        <button type="button" onclick="createUser()">Create User</button>
+        <!-- Update the onclick function to match the correct function name -->
+        <button type="button" onclick="createUser()">Sign Up</button>
     </form>
 
     <div id="result"></div>
@@ -24,12 +26,12 @@
         function createUser() {
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
-
+    
             const data = {
                 username: username,
                 password: password
             };
-
+    
             fetch('/api/users', {
                 method: 'POST',
                 headers: {
@@ -40,6 +42,12 @@
             .then(response => response.json())
             .then(data => {
                 document.getElementById('result').innerHTML = `<p>${data.message}</p>`;
+                
+                // Check if the response contains a 'message' key and if it says 'User created successfully'
+                if (data.message === 'User created successfully') {
+                    // Redirect to the login page
+                    window.location.href = '/staff/login';
+                }
             })
             .catch((error) => {
                 console.error('Error:', error);

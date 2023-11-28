@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Head content -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Page</title>
@@ -31,9 +32,16 @@
             xhr.onreadystatechange = function() {
                 if (xhr.readyState === 4) {
                     if (xhr.status === 200) {
-                        document.getElementById('result').innerHTML = 'Login successful';
-                    } else {
-                        document.getElementById('result').innerHTML = 'Login failed. Check your credentials.';
+                        // Parse the JSON response
+                        var response = JSON.parse(xhr.responseText);
+                        
+                        // Check if the response contains a 'message' key and if it says 'Login successful'
+                        if (response.message === 'Login successful') {
+                            // Redirect to the user dashboard
+                            window.location.href = '/user/dashboard';
+                        } else {
+                            document.getElementById('result').innerHTML = 'Login failed. Check your credentials.';
+                        }
                     }
                 }
             };
