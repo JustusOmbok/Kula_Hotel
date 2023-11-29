@@ -2,23 +2,61 @@
 <html lang="en">
 <head>
     <!-- Head content -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kula Hotel</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
-    <h1>Kula Hotel</h1>
-
-    <div>
-        <h2>Booking</h2>
-        <a href="{{ url_for('booking_dashboard') }}">Dashboard</a>
-    </div>
-
-    <div>
-        <h2>Staff</h2>
-        <a href="{{ url_for('staff_dashboard') }}">Dashboard</a>
-    </div>
+    <!-- Logo centered at the top -->
+    <header>
+        <div class="logo-container">
+            <img src="{{ url_for('static', filename='images/AFRICA.png') }}" alt="Kula Hotel Logo">
+        </div>
+        <nav>
+            <a href="{{ url_for('staff_dashboard') }}">Staff</a>
+            <a href="{{ url_for('booking_dashboard') }}">Booking</a>
+        </nav>
+    </header>
 
     <!-- Middle content with hotel pictures and descriptions -->
+    <div>
+        <h2>Hotel Rooms</h2>
+
+        <!-- Standard Room -->
+        <div>
+            <img src="{{ url_for('static', filename='images/standard.jfif') }}" alt="Standard Room">
+            <p>Features include: a queen-sized bed with crisp linens, an en-suite bathroom with toiletries, a dresser, a desk with chairs, a flat-screen TV, climate control, and Wi-Fi access.</p>
+        </div>
+
+        <!-- Executive Room -->
+        <div>
+            <img src="{{ url_for('static', filename='images/executive.jfif') }}" alt="Executive Room">
+            <p>Features include: a king-sized bed adorned in Egyptian cotton, a marble-clad en-suite bathroom featuring designer toiletries, a chic workspace with ergonomic furnishings, and a lavish seating area. Enhanced amenities may encompass a stocked minibar, 24-hour room service, and exclusive access to a private executive lounge.</p>
+        </div>
+
+        <!-- Presidential Suite -->
+        <div>
+            <img src="{{ url_for('static', filename='images/presidential.jfif') }}" alt="Presidential Suite">
+            <p>Features include: a master suite with a grand canopy bed, a spa-like en-suite bathroom featuring premium amenities, a private living and dining area with bespoke furnishings, and panoramic views. Exclusive services include a personal concierge, chauffeur-driven transportation, and access to private lounges.</p>
+        </div>
+    </div>
 
     <!-- GitHub icons linking to developers' GitHub accounts -->
-
+    <footer>
+        <p>Developed By:</p>
+        <div>
+            <a href="https://github.com/JustusOmbok" target="_blank">
+                <img src="{{ url_for('static', filename='images/github-Justus.png') }}" alt="Justus GitHub">
+                <p>Justus Ombok</p>
+            </a>
+        </div>
+        <div>
+            <a href="https://github.com/sendyTheDev" target="_blank">
+                <img src="{{ url_for('static', filename='images/github-Sandra.png') }}" alt="Sandra GitHub">
+                <p>Sandra Mauku</p>
+            </a>
+        </div>
+    </footer>
 </body>
 </html>
