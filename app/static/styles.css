@@ -30,7 +30,6 @@ nav a {
     font-size: 14px;
 }
 
-
 /* Middle content styles */
 h2 {
     text-align: center;
@@ -52,7 +51,6 @@ div img {
     border-radius: 5px;
     margin-bottom: 10px;
 }
-
 
 /* Footer styles */
 footer {
@@ -83,6 +81,91 @@ footer img {
     max-width: 20px;
     height: auto;
     border-radius: 50%;
+}
+
+/* Additional Styles for New Content */
+div > div.hotel-section {
+    margin: 10px;
+    padding: 15px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+    text-align: center; /* Center-align the content in the hotel section */
+}
+
+div > div.hotel-section img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+div > div.hotel-section h2,
+div > div.hotel-section p {
+    text-align: center;
+}
+
+/* Center-align the "Book Now" button in the hotel section */
+.center-btn {
+    display: block;
+    margin: 15px auto; /* Center-align the button horizontally */
+}
+
+/* Button styles */
+.nav-button,
+.book-now-btn {
+    display: inline-block; /* Change to inline-block to have buttons side-by-side */
+    margin: 15px 8px; /* Adjust margin for spacing between buttons */
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Header button styles */
+header .nav-button,
+header .book-now-btn {
+    margin: 0 8px; /* Maintain the previous alignment for buttons in the header */
+}
+
+/* Hover effect */
+.nav-button:hover,
+.book-now-btn:hover {
+    background-color: #555;
+    color: #fff;
+}
+
+/* Additional styles for inline-block elements */
+.suite {
+    display: inline-block;
+    vertical-align: top; /* Align the images and text at the top */
+    margin: 10px;
+    padding: 15px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.suite img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+/* Additional styles for text containers to make texts and images side-by-side */
+.text-content {
+    display: inline-block;
+    vertical-align: top; /* Align the text containers at the top */
+    max-width: 60%; /* Adjust the width as needed */
+}
+
+/* Additional styles for left-aligned images */
+.left-align {
+    float: left;
+    margin-right: 20px; /* Adjust as needed for spacing */
 }
 
 /* Responsive styles */

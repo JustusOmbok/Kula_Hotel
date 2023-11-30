@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <!-- Head content -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles11.css') }}">
 </head>
 <body>
     <h1>User Dashboard</h1>
@@ -10,8 +11,33 @@
         <h2>User Actions</h2>
         <a href="{{ url_for('render_add_room') }}">Add Room</a>
         <a href="{{ url_for('render_get_all_bookings') }}">Get Bookings</a>
-        <a href="{{ url_for('logout') }}">Logout</a>
+        <button id="logoutBtn">Logout</button>
     </div>
+
+    <script>
+        document.getElementById('logoutBtn').addEventListener('click', function() {
+            // Send a POST request to the /logout endpoint
+            fetch('/logout', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({}),
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data.message);
+                alert(data.message); // Display the response message in an alert
+                if (data.success) {
+                    // Redirect to homepage
+                    window.location.href = '/';
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        });
+    </script>
 
 </body>
 </html>

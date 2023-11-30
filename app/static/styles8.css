@@ -10,7 +10,7 @@ h2 {
     color: #333;
 }
 
-#bookingForm {
+#addRoomForm {
     max-width: 600px;
     margin: 20px auto;
     background-color: #fff;
@@ -26,7 +26,6 @@ label {
 }
 
 input,
-select,
 button {
     width: 100%;
     padding: 10px;
@@ -34,14 +33,6 @@ button {
     box-sizing: border-box;
     border: 1px solid #ccc;
     border-radius: 4px;
-}
-
-select {
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    background: url('arrow-down.png') no-repeat right;
-    background-size: 20px;
 }
 
 button {
@@ -54,27 +45,20 @@ button:hover {
     background-color: #daa520; /* darker gold color */
 }
 
-input:invalid,
-select:invalid {
+input:invalid {
     border: 1px solid #000; /* black color */
 }
 
-input:valid,
-select:valid {
+input:valid {
     border: 1px solid #ccc;
 }
 
-input:required,
-select:required {
+input:required {
     background-color: #fff9c4;
 }
 
-input[readonly] {
-    background-color: #eee;
-}
-
 @media (max-width: 600px) {
-    #bookingForm {
+    #addRoomForm {
         margin: 10px;
     }
 }

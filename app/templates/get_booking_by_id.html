@@ -4,10 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Booking API Test</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles3.css') }}">
 </head>
 <body>
 
-<h1>Booking API Test</h1>
+<h1>Booking By ID</h1>
 <button onclick="goToHomepage()">Back to Homepage</button>
 
 <label for="bookingIdInput">Booking ID:</label>
@@ -36,13 +37,18 @@
         .then(response => response.json())
         .then(data => {
             // Display the result in the 'bookingResult' div
-            document.getElementById('bookingResult').innerHTML = JSON.stringify(data, null, 2);
+            document.getElementById('bookingResult').innerHTML = formatJson(data);
         })
         .catch(error => {
             console.error('Error:', error);
             document.getElementById('bookingResult').innerHTML = 'Error occurred. Check the console for details.';
         });
     }
+
+    function formatJson(jsonData) {
+        return '<pre>' + JSON.stringify(jsonData, null, 2) + '</pre>';
+    }
+
     // Function to navigate back to the user dashboard
     function goToHomepage() {
         // Assuming the user dashboard URL is '/user_dashboard', update it accordingly

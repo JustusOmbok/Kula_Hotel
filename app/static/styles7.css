@@ -5,13 +5,13 @@ body {
     padding: 0;
 }
 
-h2 {
+h1 {
     text-align: center;
-    color: #333;
+    color: #000; /* black color */
 }
 
-#bookingForm {
-    max-width: 600px;
+#signupForm {
+    max-width: 400px;
     margin: 20px auto;
     background-color: #fff;
     padding: 20px;
@@ -22,12 +22,10 @@ h2 {
 label {
     display: block;
     margin-bottom: 8px;
-    color: #333;
+    color: #000; /* black color */
 }
 
-input,
-select,
-button {
+input {
     width: 100%;
     padding: 10px;
     margin-bottom: 15px;
@@ -36,17 +34,13 @@ button {
     border-radius: 4px;
 }
 
-select {
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    background: url('arrow-down.png') no-repeat right;
-    background-size: 20px;
-}
-
 button {
+    width: 100%;
+    padding: 10px;
     background-color: #ffd700; /* gold color */
     color: #000; /* black color */
+    border: none;
+    border-radius: 4px;
     cursor: pointer;
 }
 
@@ -54,27 +48,8 @@ button:hover {
     background-color: #daa520; /* darker gold color */
 }
 
-input:invalid,
-select:invalid {
-    border: 1px solid #000; /* black color */
-}
-
-input:valid,
-select:valid {
-    border: 1px solid #ccc;
-}
-
-input:required,
-select:required {
-    background-color: #fff9c4;
-}
-
-input[readonly] {
-    background-color: #eee;
-}
-
-@media (max-width: 600px) {
-    #bookingForm {
-        margin: 10px;
-    }
+#result {
+    text-align: center;
+    margin-top: 20px;
+    color: #000; /* black color */
 }

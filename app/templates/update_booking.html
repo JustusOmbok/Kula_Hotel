@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Update Booking</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles3.css') }}">
 </head>
 <body>
 
@@ -13,63 +14,63 @@
     <input type="text" id="bookingId" placeholder="Enter Booking ID">
 
     <label for="checkInDate">New Check In Date:</label>
-    <input type="text" id="checkInDate" placeholder="Enter New Check In Date (YYYY-MM-DD)">
+    <input type="date" id="checkInDate">
 
     <label for="checkOutDate">New Check Out Date:</label>
-    <input type="text" id="checkOutDate" placeholder="Enter New Check Out Date (YYYY-MM-DD)">
+    <input type="date" id="checkOutDate">
 
     <button onclick="updateBooking()">Update Booking</button>
 
     <div id="result"></div>
 
     <script>
-    function updateBooking() {
-        var bookingId = document.getElementById('bookingId').value;
-        var newCheckInDate = document.getElementById('checkInDate').value;
-        var newCheckOutDate = document.getElementById('checkOutDate').value;
+        function updateBooking() {
+            var bookingId = document.getElementById('bookingId').value;
+            var newCheckInDate = document.getElementById('checkInDate').value;
+            var newCheckOutDate = document.getElementById('checkOutDate').value;
 
-        // Check if newCheckInDate and newCheckOutDate are not empty
-        if (!newCheckInDate || !newCheckOutDate) {
-            console.error('Check In Date and Check Out Date are required.');
-            return;
+            // Check if newCheckInDate and newCheckOutDate are not empty
+            if (!newCheckInDate || !newCheckOutDate) {
+                console.error('Check In Date and Check Out Date are required.');
+                return;
+            }
+
+            // Make sure the dates are in the correct format (YYYY-MM-DD)
+            var checkInDateParts = newCheckInDate.split('-');
+            var checkOutDateParts = newCheckOutDate.split('-');
+
+            if (checkInDateParts.length !== 3 || checkOutDateParts.length !== 3) {
+                console.error('Invalid date format. Use YYYY-MM-DD.');
+                return;
+            }
+
+            var formattedCheckInDate = checkInDateParts[0] + '-' + checkInDateParts[1] + '-' + checkInDateParts[2];
+            var formattedCheckOutDate = checkOutDateParts[0] + '-' + checkOutDateParts[1] + '-' + checkOutDateParts[2];
+
+            // Make a PUT request using fetch API
+            fetch(`/api/bookings/${bookingId}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    check_in_date: formattedCheckInDate,
+                    check_out_date: formattedCheckOutDate,
+                }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Display the result
+                document.getElementById('result').innerHTML = JSON.stringify(data, null, 2);
+                alert(data.message);
+                // Optionally, you can redirect or perform other actions after successful booking
+                window.location.href = '/';
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
         }
-
-        // Make sure the dates are in the correct format (YYYY-MM-DD)
-        var checkInDateParts = newCheckInDate.split('-');
-        var checkOutDateParts = newCheckOutDate.split('-');
-
-        if (checkInDateParts.length !== 3 || checkOutDateParts.length !== 3) {
-            console.error('Invalid date format. Use YYYY-MM-DD.');
-            return;
-        }
-
-        var formattedCheckInDate = checkInDateParts[0] + '-' + checkInDateParts[1] + '-' + checkInDateParts[2];
-        var formattedCheckOutDate = checkOutDateParts[0] + '-' + checkOutDateParts[1] + '-' + checkOutDateParts[2];
-
-        // Make a PUT request using fetch API
-        fetch(`/api/bookings/${bookingId}`, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                check_in_date: formattedCheckInDate,
-                check_out_date: formattedCheckOutDate,
-            }),
-        })
-        .then(response => response.json())
-        .then(data => {
-            // Display the result
-            document.getElementById('result').innerHTML = JSON.stringify(data, null, 2);
-            alert(data.message);
-            // Optionally, you can redirect or perform other actions after successful booking
-            window.location.href = '/';
-        })
-        .catch(error => {
-            console.error('Error:', error);
-        });
-    }
-</script>
+    </script>
 
 </body>
 </html>

@@ -1,0 +1,33 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+button {
+    display: block;
+    margin: 20px auto;
+    padding: 10px;
+    box-sizing: border-box;
+    border: 1px solid #000; /* black color */
+    border-radius: 4px;
+    background-color: #ffd700; /* gold color */
+    color: #000; /* black color */
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #daa520; /* darker gold color */
+}
+
+@media (max-width: 600px) {
+    button {
+        margin: 10px auto;
+    }
+}

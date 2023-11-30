@@ -14,31 +14,56 @@
             <img src="{{ url_for('static', filename='images/AFRICA.png') }}" alt="Kula Hotel Logo">
         </div>
         <nav>
-            <a href="{{ url_for('staff_dashboard') }}">Staff</a>
-            <a href="{{ url_for('booking_dashboard') }}">Booking</a>
+            <a href="{{ url_for('staff_dashboard') }}" class="nav-button">Staff Only</a>
+            <a href="{{ url_for('booking_dashboard') }}" class="nav-button">Book Now</a>
         </nav>
     </header>
 
     <!-- Middle content with hotel pictures and descriptions -->
     <div>
-        <h2>Hotel Rooms</h2>
-
-        <!-- Standard Room -->
-        <div>
-            <img src="{{ url_for('static', filename='images/standard.jfif') }}" alt="Standard Room">
-            <p>Features include: a queen-sized bed with crisp linens, an en-suite bathroom with toiletries, a dresser, a desk with chairs, a flat-screen TV, climate control, and Wi-Fi access.</p>
+        <!-- Kula Royal Hotel Image and Content -->
+        <div class="hotel-section">
+            <img src="{{ url_for('static', filename='images/kula.jfif') }}" alt="Kula Royal Hotel" class="left-align">
+            <div class="text-content right-align">
+                <h2 style="color: blue;">Kula Royal Hotel</h2>
+                <p style="color: blue;">Welcome to Our Refreshing African Hospitality</p>
+                <p>Kula Royal Hotel View<br>Nairobi, Kenya</p>
+                <p>Kula Royal Hotel features an outdoor swimming pool, fitness centre, a garden and terrace in Nairobi. Among the facilities of this property are a restaurant, room service, and a 24-hour front desk, along with free WiFi throughout the property. The property is 2.9 km from the city centre and 5.9 km from Nairobi Railway Station.</p>
+                <a href="{{ url_for('booking_dashboard') }}" class="book-now-btn center-btn">Book Now</a>
+            </div>
         </div>
 
-        <!-- Executive Room -->
-        <div>
-            <img src="{{ url_for('static', filename='images/executive.jfif') }}" alt="Executive Room">
-            <p>Features include: a king-sized bed adorned in Egyptian cotton, a marble-clad en-suite bathroom featuring designer toiletries, a chic workspace with ergonomic furnishings, and a lavish seating area. Enhanced amenities may encompass a stocked minibar, 24-hour room service, and exclusive access to a private executive lounge.</p>
-        </div>
+        <!-- Existing Hotel Rooms -->
+        <div class="room-section">
+            <!-- Standard Room -->
+            <div class="suite">
+                <img src="{{ url_for('static', filename='images/standard.jfif') }}" alt="Standard Room" class="left-align">
+                <div class="text-content right-align">
+                    <h2 style="color: blue;">Standard Suite</h2>
+                    <p>Features include: a queen-sized bed with crisp linens, an en-suite bathroom with toiletries, a dresser, a desk with chairs, a flat-screen TV, climate control, and Wi-Fi access.</p>
+                    <a href="{{ url_for('booking_dashboard') }}" class="book-now-btn">Book Now</a>
+                </div>
+            </div>
 
-        <!-- Presidential Suite -->
-        <div>
-            <img src="{{ url_for('static', filename='images/presidential.jfif') }}" alt="Presidential Suite">
-            <p>Features include: a master suite with a grand canopy bed, a spa-like en-suite bathroom featuring premium amenities, a private living and dining area with bespoke furnishings, and panoramic views. Exclusive services include a personal concierge, chauffeur-driven transportation, and access to private lounges.</p>
+            <!-- Executive Room -->
+            <div class="suite">
+                <img src="{{ url_for('static', filename='images/executive.jfif') }}" alt="Executive Room" class="left-align">
+                <div class="text-content right-align">
+                    <h2 style="color: blue;">Executive Suite</h2>
+                    <p>Features include: a king-sized bed adorned in Egyptian cotton, a marble-clad en-suite bathroom featuring designer toiletries, a chic workspace with ergonomic furnishings, and a lavish seating area. Enhanced amenities may encompass a stocked minibar, 24-hour room service, and exclusive access to a private executive lounge.</p>
+                    <a href="{{ url_for('booking_dashboard') }}" class="book-now-btn">Book Now</a>
+                </div>
+            </div>
+
+            <!-- Presidential Suite -->
+            <div class="suite">
+                <img src="{{ url_for('static', filename='images/presidential.jfif') }}" alt="Presidential Suite" class="left-align">
+                <div class="text-content right-align">
+                    <h2 style="color: blue;">Presidential Suite</h2>
+                    <p>Features include: a master suite with a grand canopy bed, a spa-like en-suite bathroom featuring premium amenities, a private living and dining area with bespoke furnishings, and panoramic views. Exclusive services include a personal concierge, chauffeur-driven transportation, and access to private lounges.</p>
+                    <a href="{{ url_for('booking_dashboard') }}" class="book-now-btn">Book Now</a>
+                </div>
+            </div>
         </div>
     </div>
 
