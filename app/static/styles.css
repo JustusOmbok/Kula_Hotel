@@ -193,3 +193,65 @@ header .book-now-btn {
         margin: 5px 0;
     }
 }
+
+/* Staff Dashboard Styles */
+body.staff-dashboard {
+    background-color: #f8f8f8;
+}
+
+h1.staff-dashboard {
+    text-align: center;
+    margin: 20px 0;
+    color: #333;
+}
+
+div.staff-actions {
+    text-align: center;
+    margin: 20px;
+}
+
+div.staff-actions a {
+    display: block;
+    margin: 10px;
+    padding: 10px 20px;
+    background-color: #333;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+div.staff-actions a:hover {
+    background-color: #555;
+}
+
+/* Booking Dashboard Styles */
+body.booking-dashboard {
+    background-color: #f2f2f2;
+}
+
+h1.booking-dashboard {
+    text-align: center;
+    margin: 20px 0;
+    color: #333;
+}
+
+div.booking-actions {
+    text-align: center;
+    margin: 20px;
+}
+
+div.booking-actions a {
+    display: block;
+    margin: 10px;
+    padding: 10px 20px;
+    background-color: #333;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+div.booking-actions a:hover {
+    background-color: #555;
+}
