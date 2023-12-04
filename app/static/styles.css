@@ -32,7 +32,7 @@ nav a {
 
 /* Middle content styles */
 h2 {
-    text-align: center;
+    text-align: left;
     margin: 15px 0;
     font-size: 18px;
 }
@@ -102,7 +102,7 @@ div > div.hotel-section img {
 
 div > div.hotel-section h2,
 div > div.hotel-section p {
-    text-align: center;
+    text-align: left;
 }
 
 /* Center-align the "Book Now" button in the hotel section */
@@ -145,7 +145,7 @@ header .book-now-btn {
     background-color: #fff;
     border-radius: 8px;
     box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
-    text-align: center;
+    text-align: left;
 }
 
 .suite img {

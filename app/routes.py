@@ -2,7 +2,6 @@ from flask import render_template, request, jsonify, session, redirect, url_for
 from app import app, db
 from datetime import datetime
 from app.models import Booking, Guest, Room, User
-
 # Home Page
 @app.route('/')
 def homepage():
@@ -57,7 +56,9 @@ def render_login():
 def get_bookings():
     # Fetch all bookings from the database and return as JSON
     bookings = Booking.query.all()
-    return jsonify([booking.serialize() for booking in bookings])
+    # Serialize bookings with booking ID included
+    serialized_bookings = [{'id': booking.id, **booking.serialize()} for booking in bookings]
+    return jsonify(serialized_bookings)
 
 @app.route('/api/bookings/<int:booking_id>', methods=['GET'])
 def get_booking(booking_id):
@@ -96,7 +97,9 @@ def create_booking():
         db.session.add(booking)
         db.session.commit()
 
-        return jsonify({'message': 'Booking created successfully'}), 201
+        # Return the booking ID along with the success message
+        booking_id = booking.id
+        return jsonify({'message': 'Booking created successfully', 'booking_id': booking_id}), 201
     else:
         return jsonify({'error': 'Room not available or does not exist'}), 400
 

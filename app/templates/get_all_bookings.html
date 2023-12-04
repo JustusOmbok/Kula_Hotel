@@ -14,7 +14,7 @@
 
     <button onclick="getBookings()">Get Bookings</button>
 
-    <div id="result"></div>
+    <pre id="result"></pre>
 
     <script>
         function getBookings() {
@@ -22,18 +22,19 @@
             fetch('/api/bookings')
                 .then(response => response.json())
                 .then(data => {
-                    // Display the result on the webpage
-                    document.getElementById('result').innerHTML = JSON.stringify(data, null, 2);
+                    // Format each booking JSON and display on the webpage
+                    const formattedBookings = data.map(booking => JSON.stringify(booking, null, 2)).join('\n\n');
+                    document.getElementById('result').textContent = formattedBookings;
                 })
                 .catch(error => {
                     console.error('Error:', error);
-                    document.getElementById('result').innerHTML = 'Error occurred. Check the console for details.';
+                    document.getElementById('result').textContent = 'Error occurred. Check the console for details.';
                 });
         }
 
         // Function to navigate back to the user dashboard
         function goToUserDashboard() {
-            // Assuming the user dashboard URL is '/user_dashboard', update it accordingly
+            // Assuming the user dashboard URL is '/user/dashboard', update it accordingly
             window.location.href = '/user/dashboard';
         }
     </script>
