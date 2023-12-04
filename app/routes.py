@@ -11,6 +11,10 @@ def homepage():
 def booking_dashboard():
     return render_template('booking_dashboard.html')
 
+@app.route('/about')
+def about():
+    return render_template('about.html')
+
 @app.route('/staff/dashboard')
 def staff_dashboard():
     return render_template('staff_dashboard.html')
