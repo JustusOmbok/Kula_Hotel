@@ -202,7 +202,7 @@ body.staff-dashboard {
 h1.staff-dashboard {
     text-align: center;
     margin: 20px 0;
-    color: #333;
+    color: rgb(209, 132, 139);;
 }
 
 div.staff-actions {
@@ -214,7 +214,7 @@ div.staff-actions a {
     display: block;
     margin: 10px;
     padding: 10px 20px;
-    background-color: #333;
+    background-color: rgb(209, 132, 139);;
     color: #fff;
     text-decoration: none;
     border-radius: 5px;
@@ -233,7 +233,7 @@ body.booking-dashboard {
 h1.booking-dashboard {
     text-align: center;
     margin: 20px 0;
-    color: #333;
+    color: rgb(209, 132, 139);;
 }
 
 div.booking-actions {
@@ -245,7 +245,7 @@ div.booking-actions a {
     display: block;
     margin: 10px;
     padding: 10px 20px;
-    background-color: #333;
+    background-color: rgb(209, 132, 139);;
     color: #fff;
     text-decoration: none;
     border-radius: 5px;

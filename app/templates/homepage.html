@@ -14,25 +14,25 @@
             <img src="{{ url_for('static', filename='images/AFRICA.png') }}" alt="Kula Hotel Logo">
         </div>
         <nav>
-            <a href="#staff" class="nav-button">Staff Only</a>
+            <a href="{{ url_for('index') }}" class="nav-button">Home</a>
             <a href="#booking" class="nav-button">Guests</a>
-            <a href="{{ url_for('about') }}" class="nav-button">About</a>
+            <a href="#staff" class="nav-button">Staff</a>
         </nav>
     </header>
 
     <!-- Middle content with hotel pictures and descriptions -->
     <div>
         <!-- Kula Royal Hotel Image and Content -->
-        <div class="hotel-section">
+        <!--div class="hotel-section">
             <img src="{{ url_for('static', filename='images/kula.jfif') }}" alt="Kula Royal Hotel" class="left-align">
             <div class="text-content right-align">
                 <h2 style="color: blue;">Kula Royal Hotel</h2>
                 <p style="color: blue;">Welcome to Our Refreshing African Hospitality</p>
                 <p>Kula Royal Hotel View<br>Nairobi, Kenya</p>
                 <p>Kula Royal Hotel features an outdoor swimming pool, fitness centre, a garden and terrace in Nairobi. Among the facilities of this property are a restaurant, room service, and a 24-hour front desk, along with free WiFi throughout the property. The property is 2.9 km from the city centre and 5.9 km from Nairobi Railway Station.</p>
-                <!--a href="{{ url_for('render_create_booking') }}" class="book-now-btn center-btn">Book Now</a-->
+                <!--a href="{{ url_for('render_create_booking') }}" class="book-now-btn center-btn">Book Now</a>
             </div>
-        </div>
+        </div-->
 
         <!-- Existing Hotel Rooms -->
         <div class="room-section">
@@ -40,7 +40,7 @@
             <div class="suite">
                 <img src="{{ url_for('static', filename='images/standard1.jfif') }}" alt="Standard Room" class="left-align">
                 <div class="text-content right-align">
-                    <h2 style="color: blue;">Standard Suite</h2>
+                    <h2 style="color: rgb(209, 132, 139);">Standard Suite</h2>
                     <p>Features include: a queen-sized bed with crisp linens, an en-suite bathroom with toiletries, a dresser, a desk with chairs, a flat-screen TV, climate control, and Wi-Fi access.</p>
                     <a href="{{ url_for('render_create_booking') }}" class="book-now-btn">Book Now</a>
                 </div>
@@ -50,7 +50,7 @@
             <div class="suite">
                 <img src="{{ url_for('static', filename='images/executive.jfif') }}" alt="Executive Room" class="left-align">
                 <div class="text-content right-align">
-                    <h2 style="color: blue;">Executive Suite</h2>
+                    <h2 style="color: rgb(209, 132, 139);">Executive Suite</h2>
                     <p>Features include: a king-sized bed adorned in Egyptian cotton, a marble-clad en-suite bathroom featuring designer toiletries, a chic workspace with ergonomic furnishings, and a lavish seating area. Enhanced amenities may encompass a stocked minibar, 24-hour room service, and exclusive access to a private executive lounge.</p>
                     <a href="{{ url_for('render_create_booking') }}" class="book-now-btn">Book Now</a>
                 </div>
@@ -60,7 +60,7 @@
             <div class="suite">
                 <img src="{{ url_for('static', filename='images/presidential.jfif') }}" alt="Presidential Suite" class="left-align">
                 <div class="text-content right-align">
-                    <h2 style="color: blue;">Presidential Suite</h2>
+                    <h2 style="color: rgb(209, 132, 139);">Presidential Suite</h2>
                     <p>Features include: a master suite with a grand canopy bed, a spa-like en-suite bathroom featuring premium amenities, a private living and dining area with bespoke furnishings, and panoramic views. Exclusive services include a personal concierge, chauffeur-driven transportation, and access to private lounges.</p>
                     <a href="{{ url_for('render_create_booking') }}" class="book-now-btn">Book Now</a>
                 </div>
@@ -95,13 +95,16 @@
         <p>Developed By:</p>
         <div>
             <a href="https://github.com/JustusOmbok" target="_blank">
-                <img src="{{ url_for('static', filename='images/github-Justus.png') }}" alt="Justus GitHub">
+                <!--img src="{{ url_for('static', filename='images/github-Justus.png') }}" alt="Justus GitHub"-->
                 <p>Justus Ombok</p>
             </a>
         </div>
         <div>
+            <p>&</p>
+        </div>
+        <div>
             <a href="https://github.com/sendyTheDev" target="_blank">
-                <img src="{{ url_for('static', filename='images/github-Sandra.png') }}" alt="Sandra GitHub">
+                <!--img src="{{ url_for('static', filename='images/github-Sandra.png') }}" alt="Sandra GitHub"-->
                 <p>Sandra Mauku</p>
             </a>
         </div>

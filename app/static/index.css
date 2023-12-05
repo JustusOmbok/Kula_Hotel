@@ -1,0 +1,102 @@
+body {
+    background-color: black;
+    color: white;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    padding: 1.25rem;
+    background-color: black;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Header button styles */
+header .nav-button,
+header .book-now-btn {
+    margin: 0 8px; /* Maintain the previous alignment for buttons in the header */
+    background-color: transparent; /* Remove background color */
+    color: white;
+    text-decoration: none; /* Remove underline */
+    border: 1px solid white; /* Add a white border */
+    padding: 8px 16px; /* Adjust padding as needed */
+}
+
+/* Hover effect */
+.nav-button:hover,
+.book-now-btn:hover {
+    background-color: #555;
+    color: #fff;
+}
+
+.content-container {
+    display: flex;
+    padding: 1.25rem;
+    flex-wrap: wrap;
+}
+
+.text-container {
+    flex: 1;
+    max-width: 60%;
+    padding-right: 1.25rem;
+}
+
+.stylish-heading {
+    font-size: 2.5em;
+    color: goldenrod;
+    margin-bottom: 10px;
+}
+
+.location-info {
+    color: #ccc;
+    margin-bottom: 15px;
+}
+
+.logo-container {
+    flex: 1;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-end;
+    margin-top: -20px;
+}
+
+.logo {
+    width: 250px;
+    height: 250px;
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    padding: 10px;
+    background-color: black;
+    color: #fff;
+}
+
+footer p {
+    margin-bottom: 5px;
+    font-size: 14px;
+}
+
+footer div {
+    display: inline-block;
+    margin: 0 8px;
+}
+
+footer a {
+    color: #fff;
+    text-decoration: none;
+    display: block;
+    font-size: 14px;
+}
+
+footer img {
+    max-width: 20px;
+    height: auto;
+    border-radius: 50%;
+}

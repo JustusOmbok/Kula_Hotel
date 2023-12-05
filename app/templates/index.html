@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kula Royal Hotel</title>
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='index.css') }}">
+</head>
+<body>
+
+    <header>
+        <nav>
+            <a href="{{ url_for('about') }}" class="nav-button">About</a>
+            <a href="{{ url_for('homepage') }}" class="nav-button">Book Now</a>
+        </nav>
+    </header>
+
+  <div class="content-container">
+    <div class="text-container">
+      <h1 class="stylish-heading">Kula Royal Hotel</h1>
+      <p>Welcome to Our Refreshing African Hospitality</p>
+      <p class="location-info">Kula Royal Hotel View<br>Nairobi, Kenya</p>
+      <p>Kula Royal Hotel features an outdoor swimming pool, fitness centre, a garden and terrace in Nairobi. Among the facilities of this property are a restaurant, room service, and a 24-hour front desk, along with free WiFi throughout the property. The property is 2.9 km from the city centre and 5.9 km from Nairobi Railway Station.</p>
+      <a href="{{ url_for('homepage') }}" class="book-now-btn">Start Booking</a>
+    </div>
+
+    <div class="logo-container">
+      <img src="{{ url_for('static', filename='images/AFRICA.png') }}" alt="Logo" class="logo">
+    </div>
+  </div>
+
+  <footer>
+    <!--p>Developed By:</p>
+    <div>
+        <a href="https://github.com/JustusOmbok" target="_blank">
+            <p>Justus Ombok</p>
+        </a>
+    </div>
+    <div>
+        <p>&</p>
+    </div>
+    <div>
+        <a href="https://github.com/sendyTheDev" target="_blank">
+            <p>Sandra Mauku</p>
+        </a>
+    </div-->
+    <p>&copy; 2023 Kula Hotel. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // You can add smooth scrolling behavior using JavaScript
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    });
+  </script>
+</body>
+</html>
