@@ -3,11 +3,11 @@ from app import app, db
 from datetime import datetime
 from app.models import Booking, Guest, Room, User
 # Home Page
-@app.route('/index')
+@app.route('/')
 def index():
     return render_template('index.html')
 
-@app.route('/')
+@app.route('/homepage')
 def homepage():
     return render_template('homepage.html')
 
