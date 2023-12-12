@@ -8,7 +8,7 @@
 </head>
 <body>
 
-<h1>Booking By ID</h1>
+<h1>Check Booking</h1>
 <button onclick="goToHomepage()">Back to Homepage</button>
 
 <label for="bookingIdInput">Booking ID:</label>
@@ -36,8 +36,8 @@
         })
         .then(response => response.json())
         .then(data => {
-            // Display the result in the 'bookingResult' div
-            document.getElementById('bookingResult').innerHTML = formatJson(data);
+            // Display the result in the 'bookingResult' div as a table
+            document.getElementById('bookingResult').innerHTML = jsonToTable(data);
         })
         .catch(error => {
             console.error('Error:', error);
@@ -45,9 +45,27 @@
         });
     }
 
-    function formatJson(jsonData) {
-        return '<pre>' + JSON.stringify(jsonData, null, 2) + '</pre>';
+    function jsonToTable(jsonData) {
+    var tableHtml = '<table border="1">';
+    
+    // Display 'id' first if it exists
+    if (jsonData.hasOwnProperty('id')) {
+        tableHtml += '<tr><td>id</td><td>' + jsonData['id'] + '</td></tr>';
     }
+
+    for (var key in jsonData) {
+        if (key !== 'id') {
+            if (typeof jsonData[key] === 'object') {
+                tableHtml += '<tr><td>' + key + '</td><td>' + jsonToTable(jsonData[key]) + '</td></tr>';
+            } else {
+                tableHtml += '<tr><td>' + key + '</td><td>' + jsonData[key] + '</td></tr>';
+            }
+        }
+    }
+    
+    tableHtml += '</table>';
+    return tableHtml;
+}
 
     // Function to navigate back to the user dashboard
     function goToHomepage() {
