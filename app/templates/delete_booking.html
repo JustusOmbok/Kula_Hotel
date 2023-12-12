@@ -35,12 +35,12 @@
             .then(data => {
                 console.log(data.message);
                 alert('Booking deleted successfully!');
-                window.location.href = '/';
+                window.location.href = '/homepage';
             })
             .catch(error => {
                 console.error('Error:', error.message);
                 alert('Failed to delete booking. Please check the console for details.');
-                window.location.href = '/';
+                window.location.href = '/homepage';
             });
         }
     </script>
