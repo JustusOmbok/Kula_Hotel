@@ -1,4 +1,8 @@
 Kula Hotel Booking System
+
+Site Deployed
+http://54.160.76.99/
+
 Overview
 The Kula Hotel Booking System is a web application built with Flask, a Python web framework. It provides a user-friendly interface for both guests and staff members to manage hotel bookings, add rooms, and perform various booking-related actions.
 
@@ -17,6 +21,9 @@ Dynamically calculate total price based on room type and selected dates.
 
 Logout:
 Allow users to log out securely.
+
+Licensing
+© 2023 Kula Hotel. All rights reserved.
 
 Technologies Used
 Flask: Web framework used for building the application.

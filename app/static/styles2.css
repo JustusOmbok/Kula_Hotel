@@ -78,3 +78,27 @@ input[readonly] {
         margin: 10px;
     }
 }
+
+/* Header styles */
+header {
+    text-align: center;
+    padding: 10px;
+    background-color: #333;
+    color: #fff;
+}
+
+.logo-container img {
+    max-width: 10%;
+    height: auto;
+}
+
+nav a {
+    color: #fff;
+    text-decoration: none;
+    margin: 0 8px;
+    font-size: 14px;
+}
+
+.nav-button:hover {
+    color: rgb(240, 231, 103); /* Change color on hover */
+}

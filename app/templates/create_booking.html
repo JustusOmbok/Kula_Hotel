@@ -7,6 +7,18 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles2.css') }}">
 </head>
 <body>
+    <!-- Logo centered at the top -->
+    <header>
+        <div class="logo-container">
+            <img src="{{ url_for('static', filename='images/AFRICA.png') }}" alt="Kula Hotel Logo">
+        </div>
+        <nav>
+            <!-- Use JavaScript to redirect on button click -->
+            <a href="#" class="nav-button" onclick="redirect('/homepage')">Home</a>
+            <a href="#" class="nav-button" onclick="redirect('/homepage#booking')">Guests</a>
+            <a href="#" class="nav-button" onclick="redirect('/homepage#staff')">Staff</a>
+        </nav>
+    </header>
     <h2>Book a Room</h2>
 
     <form id="bookingForm">
@@ -56,6 +68,9 @@
     </form>
 
     <script>
+        function redirect(destination) {
+            window.location.href = destination;
+        }
         document.getElementById('roomType').addEventListener('change', function () {
             const selectedRoomType = this.value;
             const roomNumberSelect = document.getElementById('roomNumber');
@@ -160,6 +175,7 @@
                     alert('An error occurred while booking.');
                 });
         }
+        
     </script>
 </body>
 </html>
