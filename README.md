@@ -22,9 +22,6 @@ Dynamically calculate total price based on room type and selected dates.
 Logout:
 Allow users to log out securely.
 
-Licensing
-© 2023 Kula Hotel. All rights reserved.
-
 Technologies Used
 Flask: Web framework used for building the application.
 HTML, CSS, JavaScript: Front-end technologies for designing and enhancing user interfaces.
@@ -86,5 +83,6 @@ Contributions are welcome! If you find any issues or have suggestions, please op
 
 License
 This project is licensed under the MIT License.
+© 2023 Kula Hotel. All rights reserved.
 
 
