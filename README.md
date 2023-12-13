@@ -1,7 +1,5 @@
 Kula Hotel Booking System
 
-Site Deployed
-http://54.160.76.99/
 
 Overview
 The Kula Hotel Booking System is a web application built with Flask, a Python web framework. It provides a user-friendly interface for both guests and staff members to manage hotel bookings, add rooms, and perform various booking-related actions.
@@ -58,15 +56,14 @@ Project Structure
 
 Setup
 Clone the repository:
-git clone https://github.com/your-username/kula-hotel-booking-system.git
+git clone https://github.com/your-username/Kula_Hotel.git
 cd kula-hotel-booking-system
 
 Install dependencies:
 pip install -r requirements.txt
 
 Run the application:
-python run.py
-Visit http://localhost:5000 in your web browser to access the application.
+Visit http://54.160.76.99/ in your web browser to access the application.
 
 Usage
 Access the homepage to view hotel details and available rooms.
